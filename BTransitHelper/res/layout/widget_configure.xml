@@ -1,0 +1,111 @@
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:id="@+id/routeContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip" >
+
+        <TextView
+            android:id="@+id/routeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="@string/pick_route" />
+
+        <ListView
+            android:id="@+id/routeListView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/stopContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/stopText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="@string/pick_stop" />
+
+        <ListView
+            android:id="@+id/stopListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+    </LinearLayout>
+
+ <!--    <LinearLayout
+        android:id="@+id/nextBusContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/nextBusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_to_favorites" />
+
+        <Button
+            android:id="@+id/addFavoriteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="addFavoritePressed"
+            android:text="@string/add" />
+
+    </LinearLayout>
+-->
+    <LinearLayout
+        android:id="@+id/progressBarContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="#000000"
+        android:orientation="vertical"
+        android:padding="15dip"
+        android:gravity="center_horizontal"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/progressBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+</RelativeLayout>

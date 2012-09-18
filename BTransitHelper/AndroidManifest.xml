@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.mad.bus"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BIND_APPWIDGET"/>
+
+    <uses-sdk  android:minSdkVersion="7" android:targetSdkVersion="15" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" 
+        android:theme="@style/Theme.Sherlock">
+        <uses-library android:name="com.google.android.maps" />
+
+        <activity
+            android:name=".Bus_MainActivity"
+            android:theme="@android:style/Theme.DeviceDefault" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Bus_NextDeparturesActivity" >
+        </activity>
+       
+        <activity android:name=".Bus_Favorites" >
+        </activity>
+        <activity android:launchMode="singleTop" android:name=".Bus_AlarmReceiver"></activity>
+        <activity android:name=".Bus_NotificationDisplay"></activity>
+        <activity android:name=".Bus_StopMap" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Bus_CurrentBusMap" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Bus_AroundMe" android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="org.mad.bus.WidgetConfigure"
+            android:process=":widget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name="org.mad.bus.Widget"
+            android:label="@string/widget"
+            android:process=":widget"> 
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+
+                <data android:scheme="hokiehelperwidget" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget" />
+        </receiver>
+    </application>
+
+</manifest>
