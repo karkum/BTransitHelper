@@ -113,7 +113,7 @@ public class Bus_AroundMe extends SherlockMapActivity {
 							.getLastKnownLocation(LocationManager.GPS_PROVIDER)
 							.getLatitude() * 1000000), (int) (lm
 									.getLastKnownLocation(
-											LocationManager.NETWORK_PROVIDER)
+											LocationManager.GPS_PROVIDER)
 											.getLongitude() * 1000000));
 		}
 		/*
