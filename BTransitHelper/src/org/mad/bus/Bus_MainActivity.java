@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 /**
  * Main Bus activity, simply give a list of options to chose from for navigating to the 
@@ -48,23 +49,28 @@ public class Bus_MainActivity extends ListActivity {
 
 	protected void createNextActivity(int position) {
 		Intent i;
-		if (position == 0) {
-			i = new Intent(Bus_MainActivity.this,
-					Bus_NextDeparturesActivity.class);
-			startActivity(i);
-		} else if (position == 1) {
-			i = new Intent(Bus_MainActivity.this, Bus_StopMap.class);
-			startActivity(i);
-		} else if (position == 2) {
-			i = new Intent(Bus_MainActivity.this, Bus_CurrentBusMap.class);
-			startActivity(i);
-		} else if (position == 3) {
-			i = new Intent(Bus_MainActivity.this, Bus_AroundMe.class);
-			startActivity(i);
-		}
-		else if (position == 4) {
-			i = new Intent(Bus_MainActivity.this, Bus_Favorites.class);
-			startActivity(i);
+		try {
+			if (position == 0) {
+				i = new Intent(Bus_MainActivity.this,
+						Bus_NextDeparturesActivity.class);
+				startActivity(i);
+			} else if (position == 1) {
+				i = new Intent(Bus_MainActivity.this, Bus_StopMap.class);
+				startActivity(i);
+			} else if (position == 2) {
+				i = new Intent(Bus_MainActivity.this, Bus_CurrentBusMap.class);
+				startActivity(i);
+			} else if (position == 3) {
+				i = new Intent(Bus_MainActivity.this, Bus_AroundMe.class);
+				startActivity(i);
+			}
+			else if (position == 4) {
+				i = new Intent(Bus_MainActivity.this, Bus_Favorites.class);
+				startActivity(i);
+			}
+		} 
+		catch (Exception e) {
+			Toast.makeText(Bus_MainActivity.this, "Sorry, unknown Error", Toast.LENGTH_LONG).show();
 		}
 	}
 }
