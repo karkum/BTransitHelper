@@ -36,6 +36,6 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Add Favorite" />
+        android:text="@string/add_fav" />
 
 </LinearLayout>

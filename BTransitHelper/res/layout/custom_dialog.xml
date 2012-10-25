@@ -5,17 +5,17 @@
     android:orientation="vertical"
     android:padding="10dp" >
 
-    <NumberPicker
+  <!--   <NumberPicker
         android:id="@+id/number_picker"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        />
+        />-->
 
     <Button
         android:id="@+id/set_alert"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Set Alert" />
+        android:text="@string/set_alert" />
 
 </LinearLayout>

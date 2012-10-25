@@ -60,13 +60,15 @@ public class Bus_CurrentBusMap extends SherlockMapActivity {
 			Bus_BTConnection conn = new Bus_BTConnection(Bus_CurrentBusMap.this);
 			ArrayList<Bus_Bus> busses = new ArrayList<Bus_Bus>();
 			busses = conn.getCurentBusInfo();
-			for (Bus_Bus b : busses) {
-				GeoPoint point = new GeoPoint(b.getLocation().getLatitudeE6(), b.getLocation().getLongitudeE6());
-				OverlayItem overlayitem = new OverlayItem(point, b.getRoute().getShortName(), 
-						b.getRoute().getLongName());
-				
-				itemizedOverlay.addOverlay(overlayitem);
-				mapOverlays.add(itemizedOverlay);
+			if (busses != null) {
+				for (Bus_Bus b : busses) {
+					GeoPoint point = new GeoPoint(b.getLocation().getLatitudeE6(), b.getLocation().getLongitudeE6());
+					OverlayItem overlayitem = new OverlayItem(point, b.getRoute().getShortName(), 
+							b.getRoute().getLongName());
+					
+					itemizedOverlay.addOverlay(overlayitem);
+					mapOverlays.add(itemizedOverlay);
+				}
 			}
 		} else {
 			Toast.makeText(this, "No Network Connection Available", Toast.LENGTH_SHORT).show();

@@ -98,7 +98,7 @@ public class Bus_NextDeparturesActivity extends SherlockActivity {
 						
 						listOfStops = conn.getStopsOnRoute(route);
 						
-						if (listOfStops.size() == 0) {
+						if (listOfStops == null || listOfStops.size() == 0) {
 							Toast.makeText(Bus_NextDeparturesActivity.this,
 									"Bus Route currently not in service",
 									Toast.LENGTH_SHORT).show();
@@ -162,7 +162,9 @@ public class Bus_NextDeparturesActivity extends SherlockActivity {
 
 						String[] arr = new String[listOfNextDepartures.size()];
 						for (int i = 0; i < listOfNextDepartures.size(); i++) {
-							arr[i] = listOfNextDepartures.get(i).toString();
+							Bus_Time t = listOfNextDepartures.get(i);
+							if (t != null) 
+								arr[i] = t.toString();
 						}
 						ArrayAdapter<String> adapt = new ArrayAdapter<String>(
 								Bus_NextDeparturesActivity.this,

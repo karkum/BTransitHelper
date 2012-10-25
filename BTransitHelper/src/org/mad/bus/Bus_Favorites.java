@@ -100,7 +100,7 @@ public class Bus_Favorites extends SherlockListActivity {
 								final ArrayList<Bus_Time> listOfNextDepartures = conn
 										.getNextDepartures(r,
 												Integer.valueOf(s));
-								if (listOfNextDepartures.size() != 0) {
+								if (listOfNextDepartures != null &&listOfNextDepartures.size() != 0) {
 									arr = new String[listOfNextDepartures
 											.size()];
 									for (int i = 0; i < listOfNextDepartures
@@ -641,7 +641,7 @@ public class Bus_Favorites extends SherlockListActivity {
 				String r = line.substring(0, colon);
 				String s = line.substring(colon + 1);
 				list.add(Bus_Constants.STOL_ROUTE_NAMES.get(r) + " at "
-						+ Bus_Constants.STOPCODES.get(new Integer(s)));
+						+ Bus_Constants.STOPCODES.get(Integer.valueOf(s)));
 			}
 
 			fis.close();

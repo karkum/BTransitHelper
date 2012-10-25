@@ -4,11 +4,11 @@
     <item
         android:id="@+id/actionbar_new"
         android:icon="@drawable/action_new"
-        android:showAsAction="always"
         android:title="Add new favorite">
     </item>
-    
-     <item
+    <!-- android:showAsAction="always" -->
+
+    <item
         android:id="@+id/actionbar_edit"
         android:icon="@drawable/action_edit"
         android:showAsAction="always"

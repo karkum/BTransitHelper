@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	
+	<string name="set_alert">Set Alert</string>
     <string name="hello">Hello World, BusActivity!</string>
     <string name="app_name">BTransitHelper</string>
     <string name="route_prompt">Enter route:</string>
@@ -18,7 +18,8 @@
     <string name="widget">BTransitHelper</string>
     <string name="tap_to_refresh">Tap to refresh</string>
     <string name="next_bus">Next bus arrival:</string>
-	<string name="disclaimer">     *Note: bus times may not be 100% accurate</string>
+    <string name="add_fav">Add Favorite</string>
+	<string name="disclaimer">     Note: bus times may not be 100 percent accurate</string>
     <string-array name="routes">
         <item>Choose route</item>
         <item>BTC</item>
