@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
         android:text="@string/route_prompt"
-        android:textColor="#00000000" />
+        android:textColor="#000000" />
 
     <Spinner
         android:id="@+id/fav_spinnerroute"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
         android:text="@string/stop_prompt"
-        android:textColor="#00000000" />
+        android:textColor="#000000" />
 
     <Spinner
         android:id="@+id/fav_spinnerstop"
@@ -36,6 +36,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textColor="#000000"
         android:text="@string/add_fav" />
 
 </LinearLayout>

@@ -72,7 +72,7 @@ public class Bus_NextDeparturesActivity extends SherlockActivity {
 		String[] arr = getApplicationContext().getResources().getStringArray(
 				R.array.just_routes);
 		ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
-				R.layout.real_list_item, arr);
+				R.layout.custom_spinner, arr);
 		stop_spinner.setEnabled(false);
 		stop_spinner.setClickable(false);
 		routeAdapter
@@ -112,7 +112,7 @@ public class Bus_NextDeparturesActivity extends SherlockActivity {
 						ArrayAdapter<String> stopAdapter = new ArrayAdapter<String>(
 								Bus_NextDeparturesActivity.this,
 								// android.R.layout.simple_spinner_item,
-								R.layout.real_list_item, arr);
+								R.layout.custom_spinner, arr);
 						stopAdapter
 								.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 						stop_spinner.setAdapter(stopAdapter);
@@ -168,7 +168,7 @@ public class Bus_NextDeparturesActivity extends SherlockActivity {
 						}
 						ArrayAdapter<String> adapt = new ArrayAdapter<String>(
 								Bus_NextDeparturesActivity.this,
-								R.layout.real_list_item, arr);
+								R.layout.custom_list_item, arr);
 						botList.setAdapter(adapt);
 						Toast.makeText(Bus_NextDeparturesActivity.this,
 								"Click on a time to set alert",

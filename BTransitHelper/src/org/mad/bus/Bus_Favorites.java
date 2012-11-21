@@ -38,15 +38,17 @@ import com.actionbarsherlock.view.MenuItem;
 
 /**
  * Activity for Bus favorites. It allows the user to add and remove favorites
- * and see the times when favorite buses will depart. I use a textfile "favorites.txt"
- * to store the favorites. It is stored in this format: "ROUTE:STOP",for ex: "HWD:1011".
+ * and see the times when favorite buses will depart. I use a textfile
+ * "favorites.txt" to store the favorites. It is stored in this format:
+ * "ROUTE:STOP",for ex: "HWD:1011".
  * 
- * TO add a favorite, open the file, read the file into a buffer, append the new fav to the 
- * buffer and then write the buffer to the file.
- * to delete a favorite, go through the file, compare each line to the one we want to delete
+ * TO add a favorite, open the file, read the file into a buffer, append the new
+ * fav to the buffer and then write the buffer to the file. to delete a
+ * favorite, go through the file, compare each line to the one we want to delete
  * and remove that line, and put back the rest.
+ * 
  * @author karthik
- *
+ * 
  */
 public class Bus_Favorites extends SherlockListActivity {
 
@@ -81,7 +83,7 @@ public class Bus_Favorites extends SherlockListActivity {
 		ListView lv = getListView();
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
-			//when a favorite is clicked, give them options to add alerts
+			// when a favorite is clicked, give them options to add alerts
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
 				try {
@@ -100,7 +102,8 @@ public class Bus_Favorites extends SherlockListActivity {
 								final ArrayList<Bus_Time> listOfNextDepartures = conn
 										.getNextDepartures(r,
 												Integer.valueOf(s));
-								if (listOfNextDepartures != null &&listOfNextDepartures.size() != 0) {
+								if (listOfNextDepartures != null
+										&& listOfNextDepartures.size() != 0) {
 									arr = new String[listOfNextDepartures
 											.size()];
 									for (int i = 0; i < listOfNextDepartures
@@ -131,194 +134,109 @@ public class Bus_Favorites extends SherlockListActivity {
 																DialogInterface dialog,
 																int whichButton) {
 
-															final String[] nums = { "1", "5", "10", "15", "20" };
+															final String[] nums = {
+																	"1", "5",
+																	"10", "15",
+																	"20" };
 
 															AlertDialog.Builder builder = new AlertDialog.Builder(
 																	Bus_Favorites.this);
 															builder.setTitle("Choose alert time");
 															int checked = 0;
-															builder.setSingleChoiceItems(nums, checked,
+															builder.setSingleChoiceItems(
+																	nums,
+																	checked,
 																	new DialogInterface.OnClickListener() {
-																		public void onClick(DialogInterface dialog, int item) {
-																			chosen = Integer.valueOf(nums[item]);
+																		public void onClick(
+																				DialogInterface dialog,
+																				int item) {
+																			chosen = Integer
+																					.valueOf(nums[item]);
 																		}
 																	})
-																	.setPositiveButton("Set Alert",
+																	.setPositiveButton(
+																			"Set Alert",
 																			new DialogInterface.OnClickListener() {
-																				public void onClick(DialogInterface dialog,
+																				public void onClick(
+																						DialogInterface dialog,
 																						int whichButton) {
 																					int timeBefore = chosen;
 																					dialog.dismiss();
 																					Calendar leaving = selected
 																							.getDepartureTime();
-																					leaving.add(Calendar.MINUTE, -1
-																							* timeBefore);
+																					leaving.add(
+																							Calendar.MINUTE,
+																							-1
+																									* timeBefore);
 																					DateFormat format = new SimpleDateFormat(
 																							"hh:mm:ss a");
 																					String finalTime = format
-																							.format(leaving.getTime());
+																							.format(leaving
+																									.getTime());
 																					Toast.makeText(
 																							Bus_Favorites.this,
-																							"Alert set for " + finalTime,
-																							Toast.LENGTH_LONG).show();
+																							"Alert set for "
+																									+ finalTime,
+																							Toast.LENGTH_LONG)
+																							.show();
 
 																					Intent intent = new Intent(
 																							Bus_Favorites.this,
 																							Bus_AlarmReceiver.class);
 																					Bundle extras = new Bundle();
-																					extras.putString("ROUTE", r);
-																					extras.putString("STOP", "" + Integer.valueOf(s));
-																					extras.putString("TIME",
+																					extras.putString(
+																							"ROUTE",
+																							r);
+																					extras.putString(
+																							"STOP",
+																							""
+																									+ Integer
+																											.valueOf(s));
+																					extras.putString(
+																							"TIME",
 																							selected.toString());
-																					extras.putInt("BEFORE", timeBefore);
+																					extras.putInt(
+																							"BEFORE",
+																							timeBefore);
 																					intent.putExtras(extras);
 																					AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-																					int requestID = (int) System.currentTimeMillis();
+																					int requestID = (int) System
+																							.currentTimeMillis();
 																					PendingIntent pendingIntent = PendingIntent
-																							.getActivity(Bus_Favorites.this,
-																									requestID, intent, 0);
+																							.getActivity(
+																									Bus_Favorites.this,
+																									requestID,
+																									intent,
+																									0);
 
-																					alarmManager.set(
-																							AlarmManager.RTC_WAKEUP,
-																							leaving.getTimeInMillis(),
-																							pendingIntent);
+																					alarmManager
+																							.set(AlarmManager.RTC_WAKEUP,
+																									leaving.getTimeInMillis(),
+																									pendingIntent);
 
 																				}
 																			})
-																	.setNegativeButton("Cancel",
+																	.setNegativeButton(
+																			"Cancel",
 																			new DialogInterface.OnClickListener() {
-																				public void onClick(DialogInterface dialog,
+																				public void onClick(
+																						DialogInterface dialog,
 																						int whichButton) {
 
 																					/*
-																					 * User clicked No so do some stuff
+																					 * User
+																					 * clicked
+																					 * No
+																					 * so
+																					 * do
+																					 * some
+																					 * stuff
 																					 */
 																				}
 																			});
-															AlertDialog alert = builder.create();
+															AlertDialog alert = builder
+																	.create();
 															alert.show();
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-//															
-//															setAlertDialog = new Dialog(
-//																	Bus_Favorites.this);
-//
-//															setAlertDialog
-//																	.setContentView(R.layout.custom_dialog);
-//															setAlertDialog
-//																	.setTitle("Set alert");
-//															setAlertDialog
-//																	.setOwnerActivity(Bus_Favorites.this);
-//
-//															np = (NumberPicker) setAlertDialog
-//																	.findViewById(R.id.number_picker);
-//
-//															String[] nums = {
-//																	"1", "5",
-//																	"10", "15",
-//																	"20" };
-//															np.setMinValue(1);
-//															np.setMaxValue(5);
-//															np.setWrapSelectorWheel(false);
-//															np.setDisplayedValues(nums);
-//															np.setValue(1);
-//
-//															Button setButton = (Button) setAlertDialog
-//																	.findViewById(R.id.set_alert);
-//															setButton
-//																	.setOnClickListener(new OnClickListener() {
-//																		public void onClick(
-//																				View v) {
-//																			int chosen = np
-//																					.getValue();
-//																			int timeBefore = chosen == 1 ? 1
-//																					: (chosen - 1) * 5;
-//																			setAlertDialog
-//																					.dismiss();
-//																			Calendar leaving = selected
-//																					.getDepartureTime();
-//																			leaving.add(
-//																					Calendar.MINUTE,
-//																					-1
-//																							* timeBefore);
-//																			DateFormat format = new SimpleDateFormat(
-//																					"hh:mm:ss a");
-//																			String finalTime = format
-//																					.format(leaving
-//																							.getTime());
-//																			Toast.makeText(
-//																					Bus_Favorites.this,
-//																					"Alert set for "
-//																							+ finalTime
-//																							+ " minutes",
-//																					Toast.LENGTH_LONG)
-//																					.show();
-//
-//																			Intent intent = new Intent(
-//																					Bus_Favorites.this,
-//																					Bus_AlarmReceiver.class);
-//																			Bundle extras = new Bundle();
-//																			extras.putString(
-//																					"ROUTE",
-//																					r);
-//																			extras.putString(
-//																					"STOP",
-//																					""
-//																							+ s);
-//																			extras.putString(
-//																					"TIME",
-//																					selected.toString());
-//																			extras.putInt(
-//																					"BEFORE",
-//																					timeBefore);
-//																			intent.putExtras(extras);
-//																			AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//																			PendingIntent pendingIntent = PendingIntent
-//																					.getActivity(
-//																							getBaseContext(),
-//																							0,
-//																							intent,
-//																							0);
-//
-//																			alarmManager
-//																					.set(AlarmManager.RTC_WAKEUP,
-//																							leaving.getTimeInMillis(),
-//																							pendingIntent);
-//																		}
-//																	});
-//															setAlertDialog
-//																	.show();
-//
-//														}
-//													})
-//											.setNegativeButton(
-//													"Cancel",
-//													new DialogInterface.OnClickListener() {
-//														public void onClick(
-//																DialogInterface dialog,
-//																int whichButton) {
-//
-//															/*
-//															 * User clicked No
-//															 * so do some stuff
-//															 */
 														}
 													});
 									AlertDialog alert = builder.create();
@@ -342,7 +260,7 @@ public class Bus_Favorites extends SherlockListActivity {
 					fis.close();
 				} catch (FileNotFoundException e) {
 
-				} catch (IOException e) {					
+				} catch (IOException e) {
 				}
 			}
 		});
@@ -419,6 +337,7 @@ public class Bus_Favorites extends SherlockListActivity {
 	/**
 	 * Given the list of strings and the array of boolean values where each true
 	 * means we want to remove that from our list/file
+	 * 
 	 * @param list
 	 * @param chosen
 	 */
@@ -449,7 +368,7 @@ public class Bus_Favorites extends SherlockListActivity {
 			if (fos != null)
 				fos.close();
 		} catch (IOException e) {
-		
+
 		}
 		refreshList();
 	}
@@ -568,8 +487,10 @@ public class Bus_Favorites extends SherlockListActivity {
 	}
 
 	/**
-	 * Append new favorite to the file, 
-	 * @param info should have the new fav info, in this format: "HWD:1011"
+	 * Append new favorite to the file,
+	 * 
+	 * @param info
+	 *            should have the new fav info, in this format: "HWD:1011"
 	 */
 	protected void appendInfoToFile(String info) {
 		FileInputStream fis;
@@ -648,7 +569,7 @@ public class Bus_Favorites extends SherlockListActivity {
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
 		}
-		stringAdapter = new ArrayAdapter<String>(this, R.layout.real_list_item,
+		stringAdapter = new ArrayAdapter<String>(this, R.layout.custom_list_item,
 				list);
 		setListAdapter(stringAdapter);
 	}

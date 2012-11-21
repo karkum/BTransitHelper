@@ -1,7 +1,17 @@
 package org.mad.bus;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +27,7 @@ import android.widget.Toast;
  *
  */
 public class Bus_MainActivity extends ListActivity {
+	private static final String FILENAME = "ASKED";
 	/** Called when the activity is first created. */
 	@SuppressWarnings("unused")
 	private final Bus_Constants cont = new Bus_Constants();
@@ -28,7 +39,7 @@ public class Bus_MainActivity extends ListActivity {
 		String[] options = { "Departure Times", "Bus Stop Map",
 				"Current Buses Map", "Stops Around Me", "Favorites" };
 		ArrayAdapter<String> stringAdapter = new ArrayAdapter<String>(this,
-				R.layout.real_list_item, options);
+				R.layout.custom_list_item, options);
 
 		setListAdapter(stringAdapter);
 		ListView lv = getListView();
@@ -45,6 +56,51 @@ public class Bus_MainActivity extends ListActivity {
 			}
 		});
 		lv.setCacheColorHint(0);
+		try {
+			FileInputStream fis = openFileInput(FILENAME);
+		} catch (FileNotFoundException e) {
+			try {
+				FileOutputStream fos = openFileOutput(FILENAME, MODE_PRIVATE);
+				if  (!isHHInstalled()) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							Bus_MainActivity.this);
+					builder.setTitle("Shameless plug for HokieHelper");
+					builder.setMessage("Like this app?");
+					builder.setIcon(R.drawable.hh);
+					builder.setPositiveButton("Check out our other apps", new DialogInterface.OnClickListener() {
+
+						public void onClick(DialogInterface arg0, int arg1) {
+							try {
+								startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=org.mad.app.hokiehelper")));
+							} catch (android.content.ActivityNotFoundException anfe) {
+								startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=org.mad.app.hokiehelper")));
+							}
+						}
+
+					}).setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
+
+						public void onClick(DialogInterface arg0, int arg1) {
+							//do nothing
+						}
+					});
+					AlertDialog alert = builder.create();
+					alert.show();
+				}
+				try {
+					fos.write(0);
+				} catch (IOException e1) {
+					
+				}
+				try {
+					fos.close();
+				} catch (IOException e1) {
+				}
+			} catch (FileNotFoundException e1) {
+			
+			}
+		}
+
+	
 	}
 
 	protected void createNextActivity(int position) {
@@ -71,6 +127,16 @@ public class Bus_MainActivity extends ListActivity {
 		} 
 		catch (Exception e) {
 			Toast.makeText(Bus_MainActivity.this, "Sorry, unknown Error", Toast.LENGTH_LONG).show();
+		}
+	}
+	private boolean isHHInstalled() {
+		try{
+			@SuppressWarnings("unused")
+			ApplicationInfo info = getPackageManager().
+			getApplicationInfo("org.mad.app.hokiehelper", 0 );
+			return true;
+		} catch( PackageManager.NameNotFoundException e ){
+			return false;
 		}
 	}
 }
