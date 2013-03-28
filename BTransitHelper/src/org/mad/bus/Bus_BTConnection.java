@@ -28,7 +28,7 @@ public class Bus_BTConnection {
     private HttpURLConnection conn;
     private BufferedReader buffer;
     private Bus_XMLParser parser = new Bus_XMLParser();
-    private final String PREFIX = "http://www.bt4u.org/BT4U_WebService.asmx";
+    private final String PREFIX = "http://www.bt4u.org/webservices/BT4U_WebService.asmx";
     String line;
 	@SuppressWarnings("unused")
 	private Context mContext;
